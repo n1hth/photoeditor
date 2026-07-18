@@ -1031,63 +1031,210 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
 }
 
 /* =====================================================
-   MOBILE OPTIMIZATIONS (Scaling & Sizing Only)
+   MOBILE OPTIMIZATIONS (Screen-by-Screen Scaling)
    ===================================================== */
 @media (max-width: 768px) {
-    /* Prevent overall horizontal bleeding and fix Safari 100vh bug */
-    body { overflow-x: hidden; width: 100%; height: 100dvh; }
-    #editor-screen { width: 100%; height: 100dvh; position: fixed; top: 0; left: 0; }
-    
-    /* Upload Screen */
-    .upload-container { padding: 16px; gap: 20px; }
-    .brand-name { font-size: 22px; }
-    .upload-zone { padding: 32px 16px; }
-    .upload-icon { width: 60px; height: 60px; }
-    .upload-zone h2 { font-size: 18px; }
-    
-    /* Top Bar */
-    .top-bar { height: 48px; padding: 0 8px; }
-    .top-btn { width: 36px; height: 36px; }
-    .accent-btn { padding: 0 16px; font-size: 12px; }
-    
-    /* Canvas */
-    .canvas-area { padding: 56px 12px 140px; }
-    
-    /* Bottom Bar & Floating Bars */
-    .bottom-bar-wrapper { width: 100%; max-width: 100%; padding: 0 12px 20px 12px; box-sizing: border-box; }
-    .side-pill-container { position: absolute; bottom: 20px; left: 12px; z-index: 10; }
-    
-    .floating-bar { padding: 8px 12px; width: 100%; max-width: 100%; min-width: 0; }
-    .floating-bar--l1 { bottom: 20px; }
-    .floating-bar--l2 { bottom: 76px; left: 12px; right: 12px; width: auto; max-width: none; }
-    .floating-bar--l3 { bottom: 128px; left: 12px; right: 12px; width: auto; max-width: none; }
-    
-    .l2-scroller, .filter-pills-scroll, .font-boxes, .style-row, .color-swatches { width: 100%; min-width: 0; }
-    
-    .filter-pill { padding: 6px 14px; font-size: 12px; }
-    .l2-tabs { gap: 12px; }
-    .seg-btn { padding: 6px 10px; font-size: 12px; }
-    
-    /* Side Pill */
-    .side-pill-container { bottom: 20px; left: 12px; }
-    .side-pill { width: 40px; height: 40px; }
-    
-    /* Fonts & Presets */
-    .font-box, .preset-preview-btn { height: 28px; padding: 0 12px; font-size: 12px; }
-    .y2k-preview { font-size: 16px; }
-    .color-swatches .swatch { width: 24px; height: 24px; }
-    
-    /* Layers Panel */
-    .layers-panel-container { 
-        width: calc(100vw - 24px); 
-        max-width: 320px;
-        top: 64px; 
-        right: 12px; 
-        bottom: 140px; 
-        max-height: calc(100vh - 204px);
+    /* Global Viewport Lock */
+    html, body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        touch-action: none;
     }
-    .layers-header { padding: 12px 16px; }
-    .layers-list { padding: 6px; }
-    .layer-item { padding: 6px 10px; }
-    .layer-text-only { font-size: 13px !important; }
+
+    #editor-screen {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    /* 1. Upload Screen */
+    .upload-container {
+        padding: 20px 16px;
+        gap: 20px;
+        max-width: 100%;
+    }
+    .brand-name { font-size: 24px; }
+    .brand-icon { width: 40px; height: 40px; }
+    .upload-zone { padding: 32px 16px; border-radius: 24px; }
+    .upload-icon { width: 56px; height: 56px; margin-bottom: 4px; }
+    .upload-zone h2 { font-size: 17px; }
+    .upload-zone p { font-size: 13px; }
+
+    /* 2. Top Bar */
+    .top-bar {
+        height: 48px;
+        padding: 0 10px;
+    }
+    .top-btn {
+        width: 36px;
+        height: 36px;
+    }
+    .accent-btn {
+        height: 34px;
+        padding: 0 14px;
+        font-size: 12px;
+        gap: 6px;
+    }
+
+    /* 3. Canvas Area */
+    .canvas-area {
+        padding: 52px 12px 96px 12px;
+    }
+    #editor-image {
+        max-width: calc(100vw - 24px);
+        max-height: calc(100vh - 150px);
+    }
+
+    /* 4. Bottom Toolbar System (Stacked Floating Bars) */
+    .stacked-bars-container {
+        position: absolute;
+        bottom: 16px;
+        left: 0;
+        right: 0;
+        width: 100%;
+        padding: 0 8px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        pointer-events: none;
+        z-index: 20;
+    }
+
+    .bottom-bar-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        max-width: 458px;
+        box-sizing: border-box;
+    }
+
+    .side-pill-container {
+        flex-shrink: 0;
+    }
+    .side-pill {
+        height: 54px;
+        border-radius: 27px;
+    }
+    .side-pill.icon-only {
+        width: 44px;
+    }
+
+    /* Level 1 Main Toolbar */
+    .floating-bar--l1 {
+        height: 56px;
+        border-radius: 28px;
+        padding: 4px;
+        width: 100%;
+        max-width: 458px;
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .l1-content-layer {
+        inset: 4px;
+    }
+
+    .bar-tabs {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: space-around;
+        gap: 2px;
+    }
+
+    .bar-tab-btn {
+        flex: 1;
+        width: auto;
+        min-width: 0;
+        height: 48px;
+        border-radius: 20px;
+        padding: 2px 2px;
+        gap: 2px;
+    }
+    .bar-tab-btn svg {
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+    }
+    .bar-tab-btn span {
+        font-size: 9px;
+        letter-spacing: 0.2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Level 2 Sub-Toolbar (Categories) */
+    .floating-bar--l2 {
+        position: absolute;
+        bottom: 64px;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 40px;
+        width: calc(100vw - 24px);
+        max-width: 440px;
+        padding: 4px 8px;
+        border-radius: 20px;
+        animation: barSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .seg-btn {
+        height: 28px;
+        padding: 0 10px;
+        font-size: 11px;
+        border-radius: 14px;
+    }
+
+    /* Level 3 Sub-Toolbar (Fonts, Presets, Colors) */
+    .floating-bar--l3 {
+        position: absolute;
+        bottom: 108px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100vw - 24px);
+        max-width: 440px;
+        padding: 6px 8px;
+        border-radius: 20px;
+    }
+
+    .font-box, .preset-preview-btn {
+        height: 30px;
+        padding: 0 10px;
+        font-size: 11px;
+    }
+    .y2k-preview {
+        font-size: 15px;
+    }
+    .color-swatches .swatch {
+        width: 24px;
+        height: 24px;
+    }
+
+    /* 5. Layers Panel */
+    .layers-toggle-btn {
+        bottom: 16px;
+        right: 12px;
+        width: 44px;
+        height: 44px;
+    }
+    .layers-panel {
+        bottom: 66px;
+        right: 12px;
+        width: calc(100vw - 24px);
+        max-width: 300px;
+        max-height: calc(100vh - 140px);
+    }
+
+    /* 6. Vertical Text Size Slider */
+    .vertical-size-slider-container {
+        left: 10px;
+        height: 160px;
+    }
 }
+
