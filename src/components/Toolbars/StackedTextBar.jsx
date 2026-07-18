@@ -29,7 +29,7 @@ export function StackedTextBar({ textStyle, onStyleChange, onDone, onDelete, onI
     return (
         <>
             {/* LEVEL 3 */}
-            <div className={`floating-bar floating-bar--l3 ${activeL2 !== 'l3-fonts' ? 'glass-surface' : 'font-mode-container'}`}>
+            <div className="floating-bar floating-bar--l3 glass-surface">
                 {activeL2 === 'l3-fonts' && (
                     <div className="l3-panel">
                         <div className="font-boxes">

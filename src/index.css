@@ -13,7 +13,7 @@
     --r-pill: 999px;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-user-select: none; }
+* { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
 body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-base); color: var(--text-1); overflow: hidden; touch-action: none; -webkit-font-smoothing: antialiased; }
 
 /* Utilities */
@@ -382,19 +382,18 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
 .l3-panel { display: flex; align-items: center; height: 100%; width: 100%; gap: 8px; }
 
 /* L3: Fonts */
-.font-boxes { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; align-items: center; height: 100%; padding: 0 4px; justify-content: safe center; }
+.font-boxes { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; align-items: center; height: 100%; padding: 0 4px; }
 .font-boxes::-webkit-scrollbar { display: none; }
-.font-mode-container { background: transparent; border: none; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
 .font-box { 
     height: 32px; padding: 0 14px; border-radius: 16px; 
-    border: none; 
+    border: 1px solid rgba(255,255,255,0.2); 
     display: flex; align-items: center; justify-content: center; 
-    font-size: 15px; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0;
-    color: rgba(255,255,255,0.7); letter-spacing: 0.01em;
-    background: transparent;
+    font-size: 13px; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0;
+    color: rgba(255,255,255,0.9); letter-spacing: 0.01em;
+    background: rgba(255,255,255,0.03);
 }
-.font-box:hover { background: transparent; border: none; color: #fff; }
-.font-box.active { background: transparent; color: #fff; border: none; box-shadow: none; text-shadow: 0 0 12px rgba(255,255,255,0.8); transform: scale(1.1); }
+.font-box:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); color: #fff; }
+.font-box.active { background: #fff; color: #111; border-color: #fff; box-shadow: 0 4px 14px rgba(255,255,255,0.25); }
 .font-box:active { transform: scale(0.95); }
 
 /* L3: Colors */
@@ -1242,7 +1241,7 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
 
     .floating-bar--l2 {
         position: absolute;
-        bottom: 64px;
+        bottom: 116px;
         left: 50%;
         transform: translateX(-50%);
         height: 40px;
@@ -1262,7 +1261,7 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
     /* Level 3 Sub-Toolbar (Fonts, Presets, Colors) */
     .floating-bar--l3 {
         position: absolute;
-        bottom: 108px;
+        bottom: 168px;
         left: 50%;
         transform: translateX(-50%);
         width: calc(100vw - 24px);
