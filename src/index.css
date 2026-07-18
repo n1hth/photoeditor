@@ -347,7 +347,7 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
 .floating-bar--l2 { 
     height: 44px; padding: 4px 10px; 
     position: absolute; bottom: 72px; z-index: 2; 
-    animation: barSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1); 
+    animation: barSlideUpCentered 0.35s cubic-bezier(0.16, 1, 0.3, 1); 
 }
 .l2-group { display: flex; align-items: center; gap: 6px; height: 100%; width: 100%; }
 .l2-scroller { display: flex; align-items: center; gap: 4px; overflow-x: auto; scrollbar-width: none; }
@@ -375,7 +375,7 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
     height: 48px; padding: 4px 10px; border-radius: 24px; 
     position: absolute; bottom: 128px; z-index: 1; 
     max-width: 320px; /* Slightly wider */
-    animation: barSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: barSlideUpCentered 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     animation-delay: 0.05s;
     animation-fill-mode: both;
 }
@@ -560,6 +560,11 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
 @keyframes barSlideUp {
     0% { opacity: 0; transform: translateY(16px) scale(0.96); }
     100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes barSlideUpCentered {
+    0% { opacity: 0; transform: translate(-50%, 16px) scale(0.96); }
+    100% { opacity: 1; transform: translate(-50%, 0) scale(1); }
 }
 
 @keyframes fadeSlideIn {
@@ -1245,11 +1250,11 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
         left: 50%;
         transform: translateX(-50%);
         height: 40px;
-        width: calc(100vw - 24px);
-        max-width: 440px;
+        width: fit-content;
+        max-width: calc(100vw - 24px);
         padding: 4px 8px;
         border-radius: 999px;
-        animation: barSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        animation: barSlideUpCentered 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .seg-btn {
         height: 28px;
@@ -1264,8 +1269,8 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
         bottom: 168px;
         left: 50%;
         transform: translateX(-50%);
-        width: calc(100vw - 24px);
-        max-width: 440px;
+        width: fit-content;
+        max-width: calc(100vw - 24px);
         padding: 6px 8px;
         border-radius: 999px;
     }
