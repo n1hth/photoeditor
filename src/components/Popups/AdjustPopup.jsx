@@ -286,7 +286,7 @@ function CustomSlider({ conf, value, onChange, onChangeEnd }) {
         width: '100%',
         height: '6px',
         borderRadius: '3px',
-        background: 'rgba(255,255,255,0.1)',
+        background: 'rgba(255,255,255,0.15)',
         position: 'relative',
         overflow: 'hidden',
     };
@@ -297,7 +297,7 @@ function CustomSlider({ conf, value, onChange, onChangeEnd }) {
         left: fillLeft,
         width: fillWidth,
         height: '100%',
-        background: 'var(--accent-1)',
+        background: '#ffffff',
         borderRadius: '3px',
         transition: dragging.current ? 'none' : 'left 0.08s, width 0.08s',
     };
@@ -309,7 +309,7 @@ function CustomSlider({ conf, value, onChange, onChangeEnd }) {
         transform: 'translate(-50%, -50%)',
         width: '2px',
         height: '10px',
-        background: 'rgba(255,255,255,0.2)',
+        background: 'rgba(255,255,255,0.3)',
         borderRadius: '1px',
         zIndex: 1,
         pointerEvents: 'none',
@@ -320,11 +320,11 @@ function CustomSlider({ conf, value, onChange, onChangeEnd }) {
         top: '50%',
         left: `${pct}%`,
         transform: 'translate(-50%, -50%)',
-        width: '20px',
-        height: '20px',
-        borderRadius: '50%',
+        width: '26px',
+        height: '13px',
+        borderRadius: '99px',
         background: '#fff',
-        boxShadow: '0 1px 4px rgba(0,0,0,0.35)',
+        boxShadow: '0 2px 6px rgba(0,0,0,0.4)',
         zIndex: 2,
         pointerEvents: 'none',
         transition: dragging.current ? 'none' : 'left 0.08s',
@@ -436,7 +436,8 @@ export function AdjustPopup({ onClose, adjustments, onAdjust, onAdjustEnd }) {
         opacity: visible ? 1 : 0,
         transition: 'transform 0.3s cubic-bezier(0.22,1,0.36,1), opacity 0.25s ease',
         zIndex: 31,
-        width: '380px',
+        width: 'calc(100% - 24px)',
+        maxWidth: '380px',
         maxHeight: '440px',
         borderRadius: 'var(--r-lg)',
         display: 'flex',
@@ -510,7 +511,7 @@ export function AdjustPopup({ onClose, adjustments, onAdjust, onAdjustEnd }) {
             <div style={backdropStyle} onClick={handleClose} />
 
             {/* Panel */}
-            <div className="glass-surface" style={panelStyle}>
+            <div className="glass-surface adjust-panel" style={panelStyle}>
                 {/* Header */}
                 <div style={headerStyle}>
                     <span style={titleStyle}>Adjust</span>

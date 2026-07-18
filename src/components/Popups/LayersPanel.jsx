@@ -20,23 +20,27 @@ export function LayersPanel({ overlays, activeFilters = [], updateActiveFilters,
         updateActiveFilters(newFilters);
     };
 
-    const renderSlider = (filter, actualIndex, key, label, min, max, step) => (
-        <div className="slider-row" key={key} style={{ marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <div className="slider-header" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.85)' }}>
-                <span className="slider-label">{label}</span>
-                <span className="slider-value" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'monospace' }}>{filter.params?.[key]}</span>
+    const renderSlider = (filter, actualIndex, key, label, min, max, step) => {
+        const valPercent = max - min > 0 ? ((filter.params?.[key] - min) / (max - min)) * 100 : 0;
+        return (
+            <div className="slider-row" key={key} style={{ marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div className="slider-header" style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', fontWeight: 500, color: 'rgba(255,255,255,0.85)' }}>
+                    <span className="slider-label">{label}</span>
+                    <span className="slider-value" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'monospace' }}>{filter.params?.[key]}</span>
+                </div>
+                <input 
+                    type="range" 
+                    min={min} 
+                    max={max} 
+                    step={step}
+                    value={filter.params?.[key]} 
+                    onChange={(e) => updateParam(actualIndex, key, parseFloat(e.target.value))}
+                    className="smart-slider"
+                    style={{ '--val': `${valPercent}%` }}
+                />
             </div>
-            <input 
-                type="range" 
-                min={min} 
-                max={max} 
-                step={step}
-                value={filter.params?.[key]} 
-                onChange={(e) => updateParam(actualIndex, key, parseFloat(e.target.value))}
-                className="smart-slider"
-            />
-        </div>
-    );
+        );
+    };
 
     const renderColorPicker = (filter, actualIndex, key, label) => (
         <div className="slider-row" key={key} style={{ marginTop: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -151,25 +155,33 @@ export function LayersPanel({ overlays, activeFilters = [], updateActiveFilters,
     };
 
     return (
-        <div className="layers-panel glass-surface" style={{ display: 'flex', flexDirection: 'column' }}>
-            <div className="layers-header" style={{ paddingBottom: '8px' }}>
+        <div 
+            className="layers-panel glass-surface" 
+            style={{ display: 'flex', flexDirection: 'column' }}
+            onClick={(e) => e.stopPropagation()}
+            onPointerDown={(e) => e.stopPropagation()}
+            onTouchStart={(e) => e.stopPropagation()}
+        >
+            <div className="layers-header">
                 <span className="layers-title">Layers</span>
-                <button className="layers-close-btn" onClick={onClose}>
+                <button className="layers-close-btn" onClick={onClose} type="button">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                         <path d="M18 6L6 18M6 6l12 12" />
                     </svg>
                 </button>
             </div>
             
-            <div style={{ display: 'flex', padding: '0 16px 12px', gap: '8px' }}>
+            <div className="layers-tabs-container">
                 <button 
-                    style={{ flex: 1, padding: '6px 0', borderRadius: '16px', background: activeTab === 'elements' ? 'rgba(255,255,255,0.1)' : 'transparent', color: activeTab === 'elements' ? '#fff' : 'rgba(255,255,255,0.5)', border: 'none', fontSize: '12px', fontWeight: 600, cursor: 'pointer' }}
+                    type="button"
+                    className={`layer-tab-btn ${activeTab === 'elements' ? 'active' : ''}`}
                     onClick={() => setActiveTab('elements')}
                 >
                     Elements
                 </button>
                 <button 
-                    style={{ flex: 1, padding: '6px 0', borderRadius: '16px', background: activeTab === 'filters' ? 'rgba(255,255,255,0.1)' : 'transparent', color: activeTab === 'filters' ? '#fff' : 'rgba(255,255,255,0.5)', border: 'none', fontSize: '12px', fontWeight: 600, cursor: 'pointer' }}
+                    type="button"
+                    className={`layer-tab-btn ${activeTab === 'filters' ? 'active' : ''}`}
                     onClick={() => setActiveTab('filters')}
                 >
                     Filters
@@ -274,7 +286,7 @@ export function LayersPanel({ overlays, activeFilters = [], updateActiveFilters,
                                                     className="glass-slider"
                                                     min="0" max="150"
                                                     value={filter.intensity}
-                                                    style={{ width: '60px', height: '2px' }}
+                                                    style={{ width: '60px', height: '4px', '--val': `${(filter.intensity / 150) * 100}%` }}
                                                     onChange={(e) => {
                                                         const newFilters = [...activeFilters];
                                                         newFilters[actualIndex] = { ...filter, intensity: parseInt(e.target.value) };
