@@ -382,18 +382,19 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
 .l3-panel { display: flex; align-items: center; height: 100%; width: 100%; gap: 8px; }
 
 /* L3: Fonts */
-.font-boxes { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; align-items: center; height: 100%; padding: 0 4px; }
+.font-boxes { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; align-items: center; height: 100%; padding: 0 4px; justify-content: safe center; }
 .font-boxes::-webkit-scrollbar { display: none; }
+.font-mode-container { background: transparent; border: none; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
 .font-box { 
     height: 32px; padding: 0 14px; border-radius: 16px; 
-    border: 1px solid rgba(255,255,255,0.2); 
+    border: none; 
     display: flex; align-items: center; justify-content: center; 
-    font-size: 13px; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0;
-    color: rgba(255,255,255,0.9); letter-spacing: 0.01em;
-    background: rgba(255,255,255,0.03);
+    font-size: 15px; transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0;
+    color: rgba(255,255,255,0.7); letter-spacing: 0.01em;
+    background: transparent;
 }
-.font-box:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); color: #fff; }
-.font-box.active { background: #fff; color: #111; border-color: #fff; box-shadow: 0 4px 14px rgba(255,255,255,0.25); }
+.font-box:hover { background: transparent; border: none; color: #fff; }
+.font-box.active { background: transparent; color: #fff; border: none; box-shadow: none; text-shadow: 0 0 12px rgba(255,255,255,0.8); transform: scale(1.1); }
 .font-box:active { transform: scale(0.95); }
 
 /* L3: Colors */
@@ -1047,6 +1048,7 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
         .side-pill.icon-only { width: 68px; }
         .side-pill.text-only { width: auto; padding: 0 24px; white-space: nowrap; }
         .filter-pill.active { color: #000000; background: #ffffff; border-color: rgba(255, 255, 255, 0.4); box-shadow: 0 0 12px rgba(255,255,255,0.3); }
+        .bottom-bar-wrapper { padding: 12px; padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 12px); }
         .l2-scroller { flex: 1; min-width: 0; }
         .seg-btn.active { color: #000000; background: #ffffff; }
         .style-btn { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.15); background: rgba(255, 255, 255, 0.04); color: var(--text-1); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; }
@@ -1238,15 +1240,13 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
     }
 
     /* Level 2 Sub-Toolbar (Categories) */
-    .floating-bar--l2 {
+    .floating-bar--l2, .floating-bar--l1 {
         position: absolute;
-        bottom: 64px;
+        bottom: 50px;
         left: 50%;
         transform: translateX(-50%);
-        height: 40px;
-        width: calc(100vw - 24px);
         max-width: 440px;
-        padding: 4px 8px;
+        padding: 6px 8px;
         border-radius: 999px;
         animation: barSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -1263,7 +1263,6 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
         bottom: 108px;
         left: 50%;
         transform: translateX(-50%);
-        width: calc(100vw - 24px);
         max-width: 440px;
         padding: 6px 8px;
         border-radius: 999px;

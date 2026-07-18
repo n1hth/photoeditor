@@ -445,6 +445,7 @@ export function OverlayItem({ item, isSelected, onSelect, onUpdate, onUpdateEnd,
                     contentEditable={isEditing}
                     suppressContentEditableWarning
                     data-placeholder="Type here..."
+                    enterKeyHint="done"
                     onBlur={(e) => {
                         const txt = e.currentTarget.innerText.trim();
                         if (!txt) {

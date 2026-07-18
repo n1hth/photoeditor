@@ -271,7 +271,6 @@ export default function App() {
         setSelectedOverlayId(id);
         const overlay = overlays.find(o => o.id === id);
         if (overlay?.type === 'text') {
-            setActiveTool('text');
             // Load this overlay's style into the text style controls
             if (overlay.style) {
                 setTextStyle(overlay.style);
@@ -746,10 +745,12 @@ export default function App() {
                                 <div style={{
                                     position: 'absolute',
                                     inset: 0,
-                                    background: 'rgba(0,0,0,0.5)',
+                                    background: 'rgba(0,0,0,0.4)',
+                                    backdropFilter: 'blur(8px)',
+                                    WebkitBackdropFilter: 'blur(8px)',
                                     opacity: editingTextId ? 1 : 0,
                                     pointerEvents: 'none',
-                                    transition: 'opacity 0.2s',
+                                    transition: 'opacity 0.2s, backdrop-filter 0.2s',
                                     zIndex: 40
                                 }}></div>
                                 {overlays.map(item => (
@@ -762,7 +763,10 @@ export default function App() {
                                         onUpdateEnd={handleUpdateOverlayEnd}
                                         onTextChange={(id, content) => commitCanvasState(prev => ({...prev, overlays: prev.overlays.map(o => o.id === id ? { ...o, content } : o)}))}
                                         onDelete={handleDeleteOverlay}
-                                        onEditChange={(isEditing) => setEditingTextId(isEditing ? item.id : null)}
+                                        onEditChange={(isEditing) => {
+                                            setEditingTextId(isEditing ? item.id : null);
+                                            if (isEditing) setActiveTool('text');
+                                        }}
                                     />
                                 ))}
                                 </div>
