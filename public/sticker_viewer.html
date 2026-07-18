@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: sans-serif; background: #fff; color: #000; padding: 20px; }
+  .grid { display: flex; flex-wrap: wrap; gap: 10px; }
+  .item { border: 1px solid #ccc; padding: 5px; text-align: center; width: 120px; }
+  img { max-width: 100px; max-height: 100px; }
+  p { font-size: 10px; word-break: break-all; }
+</style>
+</head>
+<body>
+<h1>Stickers</h1>
+<div class="grid" id="grid"></div>
+<script>
+const files = [
+    '07be85e46531aa51a02b0f2e1d3ed7d8.png', '0d38c2c50e9eb6484859cbda51535717.jpg',
+    '0f22589734e93c2bdbbf0f5ce59c229c.png', '13410e81ee0fc67f8c629376d25cea31.jpg',
+    '13aab38ed56c1aabf5b9419ce9037e94.png', '17fc2a610c1a38035cee19da54ad187e.jpg',
+    '18ac3906e6a496973effc6a1d871fccc.png', '237d728ea21ef2567abaa4a27810e38d.png',
+    '2d64b4805a1e410936f6c53e89c316e9.png', '2f416ddda4304de5f5cb8f8df696d134.png',
+    '362c6326098b9e10e7c8ba41c5e5ba23.jpg', '39d025d85c8426253abcb7013cefb524.png',
+    '39e20c4baf65236b31090a5d12e46bc1.png', '3e934061dbe80f1ccf17c4741cf09932.png',
+    '3f8fbc8f5a71232730d9f1373c8de10e.png', '43f782d5c1e80c70908e22406afad2b8.jpg',
+    '44c50538647bc94892751bd4660b9a3b.png', '451b0d12bf9e682287d32f2b8f99f083.png',
+    '4757f951f27ebc747c356aafa5dcf736.png', '4f40010ee611e5fe23ee7a85c834c922.png',
+    '51a2804ea40c46afbda31848055fe4f0.png', '520327caad32982c2fa65ae3cc9d64db.png',
+    '5922b504c03265e386147cde10b3e00c.jpg', '59946fd8069721ab1e6e04622c8fb165.png',
+    '5d9ac9262c33b01a9f12a116d14848c5.jpg', '5dae5e7f394c669817f07f151794a0de.png',
+    '5f78af542fbfea616cb5938cc7235d90.png', '60d21f293a589f349269d9f64f90730e.jpg',
+    '6795ac5be977ddc27adda6ad95528ab4.jpg', '68641c9b794e857c8acd17e563e2f6a1.png',
+    '6a46278a351a0eca995183d52391c7f8.png', '6df4624c4e4bc9c6783f794a88847fbd.jpg',
+    '6f9296ad621df9a0080ac417619f8dde.png', '70b410c9752b5492f6af9285d18cdde4.png',
+    '715e6fd9884be54cf0416783426dc04d.png', '71e9f51eb5c17526805c4275c0186ccb.png',
+    '77c5f0648d51c9cea280f705c871c496.png', '7f4a78b178bf809f9c343eeba1e31696.png',
+    '8780ddb7c77889f603a7ecf11b100a3e.png', '930f24a9bec2fed0367b41ff5b7ce22d.png',
+    '942a76a80ba67cc09f6f6da527f92bd3.png', 'a27a20264f4d26f0f96d8a8574869efa.png',
+    'a92de38b532c6d250cb937f86af22867.png', 'a97e6d721f25f728be0269c3a7f060cb.png',
+    'aa4fd73fd413e1ef080412dbe3777566.png', 'ab41b0d03c95f08d3d7901a48511a900.jpg',
+    'afc8ac4eaa51ff2b37fc075764aab8f1.png', 'b0efa7ee78a4d8984d72bd89e5ae1021.jpg',
+    'b1ce9f2bfdc96531f246943ee19c4270.png', 'b2ff223c0d7d7d686f17fe9868071ecd.png',
+    'b371635bf054aa3f295548bca596e978.png', 'bb4b94cbd1de2593a0b20fb69cdcf4fa.png',
+    'bbd7cca7b988d8b36b29e414f7caabd2.png', 'c37e1a6120e1fabd8f40345eb3e10e39.png',
+    'c51daa3b6afe7e82f37e1f317d82373f.png', 'ce436877c3df9c8fbbe7d519286d9d73.png',
+    'deec6f847021554ae3c01d2d085f8032.jpg', 'e11e7dc3b460a4bf91a1f3c5b7d3dbe0.png',
+    'ea6ea8267b5787562ad9e9d44ac2ccb4.png', 'eab78bf4f832368555979e4e95222392.jpg',
+    'fa057905938a5888a4cadc408afc50c4.jpg'
+];
+const grid = document.getElementById('grid');
+files.forEach(f => {
+  const div = document.createElement('div');
+  div.className = 'item';
+  div.innerHTML = `<img src="/stickers/${f}"><p>${f}</p>`;
+  grid.appendChild(div);
+});
+</script>
+</body>
+</html>
