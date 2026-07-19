@@ -815,11 +815,11 @@ export default function App() {
                             {activeTool === 'text' && (
                                 <div className="vertical-size-slider-container">
                                     <div className="vertical-track">
-                                        <div className="tapering-fill" style={{ height: `${((textStyle.size - 12) / (120 - 12)) * 100}%` }}></div>
+                                        <div className="tapering-fill" style={{ height: `${((textStyle.size - 12) / (84 - 12)) * 100}%` }}></div>
                                     </div>
                                     <input 
                                         type="range" 
-                                        min="12" max="120" 
+                                        min="12" max="84" 
                                         value={textStyle.size}
                                         className="vertical-slider-input"
                                         onChange={(e) => handleStyleChange({ size: parseInt(e.target.value) })}
@@ -864,7 +864,7 @@ export default function App() {
                     )}
 
                     {/* Stacked Bars */}
-                    <div className="stacked-bars-container">
+                    <div className={`stacked-bars-container ${editingTextId ? 'text-editing-mode' : ''}`}>
                         {activeTool === 'text' && (
                             <StackedTextBar 
                                 textStyle={textStyle}
@@ -874,15 +874,17 @@ export default function App() {
                                 onInsertDate={handleInsertDate}
                             />
                         )}
-                        <BottomBar 
-                            activeTool={activeTool} 
-                            setActiveTool={handleToolChange}
-                            activeFilters={activeFilters}
-                            setActiveFilters={(f) => commitCanvasState(p => ({...p, activeFilters: f}))}
-                            commitIntensity={() => commitCanvasState(p => p)}
-                            imageSrc={imageSrc}
-                            isCropDisabled={!!layout && selectedCellIndex === null}
-                        />
+                        {!editingTextId && (
+                            <BottomBar 
+                                activeTool={activeTool} 
+                                setActiveTool={handleToolChange}
+                                activeFilters={activeFilters}
+                                setActiveFilters={(f) => commitCanvasState(p => ({...p, activeFilters: f}))}
+                                commitIntensity={() => commitCanvasState(p => p)}
+                                imageSrc={imageSrc}
+                                isCropDisabled={!!layout && selectedCellIndex === null}
+                            />
+                        )}
                     </div>
                 </div>
             )}

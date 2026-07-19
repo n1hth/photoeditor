@@ -28,6 +28,13 @@ export function StackedTextBar({ textStyle, onStyleChange, onDone, onDelete, onI
 
     return (
         <>
+            {/* TOP RIGHT DONE BUTTON */}
+            <button className="top-right-done-btn" onClick={onDone}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 12l5 5 10-10" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+            </button>
+
             {/* LEVEL 3 */}
             <div className={`floating-bar floating-bar--l3 ${activeL2 !== 'l3-fonts' ? 'glass-surface' : 'font-mode-container'}`}>
                 {activeL2 === 'l3-fonts' && (
@@ -141,12 +148,6 @@ export function StackedTextBar({ textStyle, onStyleChange, onDone, onDelete, onI
                         <button className={`seg-btn ${activeL2 === 'l3-styles' ? 'active' : ''}`} onClick={() => setActiveL2('l3-styles')}>Styles</button>
                         <button className={`seg-btn ${activeL2 === 'l3-date' ? 'active' : ''}`} onClick={() => setActiveL2('l3-date')}>Date</button>
                     </div>
-                    <div className="v-divider"></div>
-                    <button className="seg-btn done-btn" onClick={onDone}>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M3 8l3 3 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                    </button>
                 </div>
             </div>
         </>
