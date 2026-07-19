@@ -200,9 +200,9 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
 }
 
 .overlay-text { 
-    white-space: pre-wrap; 
-    word-break: break-word; 
-    max-width: 85vw; 
+    white-space: pre; 
+    word-break: normal; 
+    max-width: none; 
     min-width: 20px; 
     min-height: 20px; 
     caret-color: var(--accent-2); 
@@ -1248,7 +1248,7 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
 
     .floating-bar--l2 {
         position: absolute;
-        bottom: 100px;
+        bottom: 93px;
         left: 50%;
         transform: translateX(-50%);
         height: 40px;
@@ -1268,7 +1268,7 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
     /* Level 3 Sub-Toolbar (Fonts, Presets, Colors) */
     .floating-bar--l3 {
         position: absolute;
-        bottom: 148px;
+        bottom: 138px;
         left: 50%;
         transform: translateX(-50%);
         width: fit-content;
