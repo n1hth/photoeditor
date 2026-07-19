@@ -259,6 +259,16 @@ export default function App() {
 
     const handleCanvasClick = useCallback((e) => {
         if (e.target.id === 'editor-screen' || e.target.classList.contains('canvas-area') || e.target.classList.contains('image-wrapper')) {
+            if (editingTextId) {
+                const overlay = overlays.find(o => o.id === editingTextId);
+                if (overlay && overlay.content.trim() === '') {
+                    commitCanvasState(prev => ({
+                        ...prev,
+                        overlays: prev.overlays.filter(o => o.id !== editingTextId)
+                    }));
+                    setActiveTool(null);
+                }
+            }
             setSelectedOverlayId(null);
             setSelectedCellIndex(null);
             if (activeTool && activeTool !== 'crop' && activeTool !== 'filters' && activeTool !== 'text') {
@@ -266,7 +276,7 @@ export default function App() {
             }
             setEditingTextId(null);
         }
-    }, [activeTool]);
+    }, [activeTool, editingTextId, overlays, commitCanvasState]);
 
     const handleOverlaySelect = useCallback((id) => {
         setSelectedOverlayId(id);
@@ -280,10 +290,19 @@ export default function App() {
     }, [overlays]);
 
     const handleTextDone = useCallback(() => {
+        if (editingTextId) {
+            const overlay = overlays.find(o => o.id === editingTextId);
+            if (overlay && overlay.content.trim() === '') {
+                commitCanvasState(prev => ({
+                    ...prev,
+                    overlays: prev.overlays.filter(o => o.id !== editingTextId)
+                }));
+                setActiveTool(null);
+            }
+        }
         setSelectedOverlayId(null);
         setEditingTextId(null);
-        // Do not set activeTool to null here, so user stays in text tool (collapsed mode)
-    }, []);
+    }, [editingTextId, overlays, commitCanvasState]);
 
     // Layout Cell Upload Logic
     const cellFileInputRef = useRef(null);

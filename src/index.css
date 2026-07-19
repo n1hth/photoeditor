@@ -1174,6 +1174,7 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
         display: flex !important;
         align-items: center;
         flex-shrink: 0 !important;
+        z-index: 100 !important;
     }
 
     .bottom-bar-wrapper > .floating-bar--l1 {
@@ -1194,6 +1195,8 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
         height: 56px !important;
         border-radius: 28px !important;
         font-size: 11px !important;
+        border: 2px solid rgba(255, 255, 255, 0.6) !important;
+        z-index: 100 !important;
     }
     .side-pill.icon-only {
         width: 56px !important;
