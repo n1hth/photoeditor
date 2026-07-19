@@ -266,12 +266,11 @@ export default function App() {
                         ...prev,
                         overlays: prev.overlays.filter(o => o.id !== editingTextId)
                     }));
-                    setActiveTool(null);
                 }
             }
             setSelectedOverlayId(null);
             setSelectedCellIndex(null);
-            if (activeTool && activeTool !== 'crop' && activeTool !== 'filters' && activeTool !== 'text') {
+            if (activeTool && activeTool !== 'crop' && activeTool !== 'filters') {
                 setActiveTool(null);
             }
             setEditingTextId(null);
@@ -297,11 +296,11 @@ export default function App() {
                     ...prev,
                     overlays: prev.overlays.filter(o => o.id !== editingTextId)
                 }));
-                setActiveTool(null);
             }
         }
         setSelectedOverlayId(null);
         setEditingTextId(null);
+        setActiveTool(null);
     }, [editingTextId, overlays, commitCanvasState]);
 
     // Layout Cell Upload Logic
