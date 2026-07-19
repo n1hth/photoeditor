@@ -419,8 +419,8 @@ export function OverlayItem({ item, isSelected, onSelect, onUpdate, onUpdateEnd,
             minWidth:    '1ch',
             minHeight:   '1em',
             outline:     'none',
-            whiteSpace:  'pre-wrap',
-            wordBreak:   'break-word',
+            whiteSpace:  'pre',
+            wordBreak:   'normal',
         };
 
         return (
