@@ -35,8 +35,6 @@ export function BottomBar({ activeTool, setActiveTool, activeFilters = [], setAc
         setCurrentSetIndex((prev) => (prev + 1) % setNames.length);
     };
 
-    const isFiltersVisible = showFilters && activeTool === 'filters';
-
     return (
         <div className="bottom-bar-wrapper">
             {/* Left Side Pill: Back Arrow */}
