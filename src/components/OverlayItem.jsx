@@ -446,6 +446,12 @@ export function OverlayItem({ item, isSelected, onSelect, onUpdate, onUpdateEnd,
                     suppressContentEditableWarning
                     data-placeholder="Type here..."
                     enterKeyHint="done"
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                            e.currentTarget.blur();
+                        }
+                    }}
                     onBlur={(e) => {
                         const txt = e.currentTarget.innerText.trim();
                         if (!txt) {

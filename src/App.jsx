@@ -281,6 +281,7 @@ export default function App() {
     const handleTextDone = useCallback(() => {
         setSelectedOverlayId(null);
         setActiveTool(null);
+        setEditingTextId(null);
     }, []);
 
     // Layout Cell Upload Logic
@@ -772,17 +773,19 @@ export default function App() {
                                 </div>
                                 
                                 {/* Layers Floating Button */}
-                                <button 
-                                    className={`layers-toggle-btn glass-surface ${showLayers ? 'active' : ''}`}
-                                    onClick={(e) => { e.stopPropagation(); setShowLayers(p => !p); }}
-                                    onPointerDown={(e) => e.stopPropagation()}
-                                >
+                                {!editingTextId && (
+                                    <button 
+                                        className={`layers-toggle-btn glass-surface ${showLayers ? 'active' : ''}`}
+                                        onClick={(e) => { e.stopPropagation(); setShowLayers(p => !p); }}
+                                        onPointerDown={(e) => e.stopPropagation()}
+                                    >
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                         <polygon points="12 2 2 7 12 12 22 7 12 2" />
                                         <polyline points="2 12 12 17 22 12" />
                                         <polyline points="2 17 12 22 22 17" />
                                     </svg>
-                                </button>
+                                    </button>
+                                )}
 
                                 {/* Layers Panel */}
                                 {showLayers && (
