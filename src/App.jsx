@@ -258,7 +258,7 @@ export default function App() {
     }, [selectedOverlayId, overlays, addText]);
 
     const handleCanvasClick = useCallback((e) => {
-        if (e.target.id === 'editor-screen' || e.target.classList.contains('canvas-area') || e.target.classList.contains('image-wrapper')) {
+        if (e.target.id === 'editor-screen' || e.target.closest('.canvas-area')) {
             document.activeElement?.blur();
             if (editingTextId) {
                 const overlay = overlays.find(o => o.id === editingTextId);
@@ -492,8 +492,8 @@ export default function App() {
     useEffect(() => {
         const handleViewportResize = () => {
             if (window.visualViewport) {
-                document.documentElement.style.setProperty('--vv-height', `${window.visualViewport.height}px`);
-                document.documentElement.style.setProperty('--vv-offset-top', `${window.visualViewport.offsetTop}px`);
+                const keyboardHeight = window.innerHeight - window.visualViewport.height;
+                document.documentElement.style.setProperty('--keyboard-height', `${Math.max(0, keyboardHeight)}px`);
             }
         };
 
@@ -583,7 +583,7 @@ export default function App() {
                     });
                 }} />
             ) : (
-                <div id="editor-screen" className={activeTool === 'text' ? 'text-tool-active' : ''} style={{ height: 'var(--vv-height, 100vh)', marginTop: 'var(--vv-offset-top, 0px)' }}>
+                <div id="editor-screen" className={activeTool === 'text' ? 'text-tool-active' : ''}>
                     <input 
                         type="file" 
                         accept="image/*" 
@@ -638,7 +638,7 @@ export default function App() {
                     )}
 
                     <div className="canvas-area" onPointerDown={handleCanvasClick}>
-                        <div className={`image-wrapper`} style={{ backgroundColor: adjustments.canvasBg, '--polaroid-padding': `${adjustments.polaroidPadding}px ${adjustments.polaroidPadding}px ${adjustments.polaroidPadding * 3.5}px ${adjustments.polaroidPadding}px` }} onPointerDown={handleCanvasClick}>
+                        <div className={`image-wrapper`} style={{ backgroundColor: adjustments.canvasBg, '--polaroid-padding': `${adjustments.polaroidPadding}px ${adjustments.polaroidPadding}px ${adjustments.polaroidPadding * 3.5}px ${adjustments.polaroidPadding}px` }}>
                             <div ref={imageContentRef} className={`image-content-layer`} style={{ position: 'relative', display: 'flex', width: '100%', height: '100%' }}>
                                 <img 
                                     ref={imgRef}
@@ -824,7 +824,11 @@ export default function App() {
                                         onDelete={handleDeleteOverlay}
                                         onEditChange={(isEditing) => {
                                             setEditingTextId(isEditing ? item.id : null);
-                                            if (isEditing) setActiveTool('text');
+                                            if (isEditing) {
+                                                setActiveTool('text');
+                                            } else {
+                                                if (activeTool === 'text') setActiveTool(null);
+                                            }
                                         }}
                                     />
                                 ))}

@@ -1159,7 +1159,7 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
         z-index: 20;
     }
     .text-tool-active .stacked-bars-container {
-        bottom: 0 !important;
+        bottom: var(--keyboard-height, 0px) !important;
         padding: 0 !important;
     }
 
