@@ -864,7 +864,7 @@ export default function App() {
                     )}
 
                     {/* Stacked Bars */}
-                    <div className={`stacked-bars-container ${editingTextId ? 'text-editing-mode' : ''}`}>
+                    <div className={`stacked-bars-container ${activeTool === 'text' ? 'text-tool-active' : ''}`}>
                         {activeTool === 'text' && (
                             <StackedTextBar 
                                 textStyle={textStyle}

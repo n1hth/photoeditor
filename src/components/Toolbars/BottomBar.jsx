@@ -19,9 +19,13 @@ export function BottomBar({ activeTool, setActiveTool, activeFilters = [], setAc
         setActiveTool('filters');
     };
 
-    const handleBackFromFilters = () => {
+    const handleBackClick = () => {
         setActiveTool(null);
     };
+
+    const isFiltersVisible = showFilters && activeTool === 'filters';
+    const isTextMode = activeTool === 'text';
+    const isSidePillVisible = isFiltersVisible || isTextMode;
 
     const setNames = Object.keys(FILTER_SETS);
     const activeSetName = setNames[currentSetIndex];
@@ -36,8 +40,8 @@ export function BottomBar({ activeTool, setActiveTool, activeFilters = [], setAc
     return (
         <div className="bottom-bar-wrapper">
             {/* Left Side Pill: Back Arrow */}
-            <div className={`side-pill-container ${isFiltersVisible ? 'visible' : ''}`}>
-                <button className="side-pill glass-surface icon-only" onClick={handleBackFromFilters} title="Back">
+            <div className={`side-pill-container ${isSidePillVisible ? 'visible' : ''}`}>
+                <button className="side-pill glass-surface icon-only" onClick={handleBackClick} title="Back">
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
                         <path d="M11 4L6 9l5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
@@ -46,7 +50,7 @@ export function BottomBar({ activeTool, setActiveTool, activeFilters = [], setAc
 
             {/* Intensity Slider Tooltip/Pill Removed since we moved it to LayersPanel */}
 
-            <div className="floating-bar floating-bar--l1 glass-surface">
+            <div className={`floating-bar floating-bar--l1 glass-surface ${isTextMode ? 'hidden' : ''}`} style={{ display: isTextMode ? 'none' : 'flex' }}>
                 {/* Filters Layer (Only the filters now) */}
                 <div className={`l1-content-layer filters-layer ${isFiltersVisible ? 'visible' : ''}`}>
                     <div className="filter-pills-scroll no-controls">

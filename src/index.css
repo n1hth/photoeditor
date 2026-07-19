@@ -1049,7 +1049,7 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
 
 .top-right-done-btn {
     position: fixed;
-    top: 24px;
+    top: 72px;
     right: 24px;
     width: 36px;
     height: 36px;
@@ -1279,7 +1279,7 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
         transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
         animation: barSlideUpCentered 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .text-editing-mode .floating-bar--l2 {
+    .text-tool-active .floating-bar--l2 {
         bottom: 8px !important;
     }
     .seg-btn {
@@ -1301,7 +1301,7 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
         border-radius: 999px;
         transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
     }
-    .text-editing-mode .floating-bar--l3 {
+    .text-tool-active .floating-bar--l3 {
         bottom: 53px !important;
     }
 
