@@ -1119,6 +1119,9 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
         height: 48px;
         padding: 0 10px;
     }
+    .text-tool-active .top-bar {
+        display: none !important;
+    }
     .top-btn {
         width: 36px;
         height: 36px;
@@ -1281,6 +1284,7 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
     }
     .text-tool-active .floating-bar--l2 {
         bottom: 8px !important;
+        max-width: calc(100vw - 140px) !important;
     }
     .seg-btn {
         height: 28px;

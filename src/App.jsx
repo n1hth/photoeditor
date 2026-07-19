@@ -264,6 +264,7 @@ export default function App() {
             if (activeTool && activeTool !== 'crop' && activeTool !== 'filters') {
                 setActiveTool(null);
             }
+            setEditingTextId(null);
         }
     }, [activeTool]);
 
