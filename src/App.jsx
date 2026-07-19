@@ -261,7 +261,7 @@ export default function App() {
         if (e.target.id === 'editor-screen' || e.target.classList.contains('canvas-area') || e.target.classList.contains('image-wrapper')) {
             setSelectedOverlayId(null);
             setSelectedCellIndex(null);
-            if (activeTool && activeTool !== 'crop' && activeTool !== 'filters') {
+            if (activeTool && activeTool !== 'crop' && activeTool !== 'filters' && activeTool !== 'text') {
                 setActiveTool(null);
             }
             setEditingTextId(null);
@@ -281,8 +281,8 @@ export default function App() {
 
     const handleTextDone = useCallback(() => {
         setSelectedOverlayId(null);
-        setActiveTool(null);
         setEditingTextId(null);
+        // Do not set activeTool to null here, so user stays in text tool (collapsed mode)
     }, []);
 
     // Layout Cell Upload Logic
