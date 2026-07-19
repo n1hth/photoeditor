@@ -18,14 +18,17 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-bas
 
 /* Utilities */
 .glass-surface { 
-    background: rgba(255, 255, 255, 0.12); 
-    backdrop-filter: blur(24px) saturate(180%) contrast(110%) brightness(110%); 
-    -webkit-backdrop-filter: blur(24px) saturate(180%) contrast(110%) brightness(110%); 
-    border: 1px solid rgba(255, 255, 255, 0.25); 
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.02) 100%);
+    backdrop-filter: blur(32px) saturate(200%) contrast(110%) brightness(105%); 
+    -webkit-backdrop-filter: blur(32px) saturate(200%) contrast(110%) brightness(105%); 
+    border: 1px solid rgba(255, 255, 255, 0.15); 
+    border-top-color: rgba(255, 255, 255, 0.45);
+    border-left-color: rgba(255, 255, 255, 0.3);
     box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        inset 0 1px 2px rgba(255, 255, 255, 0.2),
-        inset 0 -1px 2px rgba(255, 255, 255, 0.05);
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        inset 0 1px 1px rgba(255, 255, 255, 0.4),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.2),
+        inset 0 10px 20px rgba(255, 255, 255, 0.05);
 }
 button { background: none; border: none; outline: none; cursor: pointer; color: inherit; font-family: inherit; }
 
@@ -1199,7 +1202,6 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
         height: 56px !important;
         border-radius: 28px !important;
         font-size: 11px !important;
-        border: 2px solid rgba(255, 255, 255, 0.6) !important;
         z-index: 100 !important;
     }
     .side-pill.icon-only {
