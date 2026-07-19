@@ -746,13 +746,17 @@ export default function App() {
                                 <div style={{
                                     position: 'absolute',
                                     inset: 0,
+                                    width: '100%',
+                                    height: '100%',
                                     background: 'rgba(0,0,0,0.4)',
                                     backdropFilter: 'blur(8px)',
                                     WebkitBackdropFilter: 'blur(8px)',
                                     opacity: editingTextId ? 1 : 0,
                                     pointerEvents: 'none',
                                     transition: 'opacity 0.2s, backdrop-filter 0.2s',
-                                    zIndex: 40
+                                    zIndex: 40,
+                                    transform: 'translateZ(0)',
+                                    willChange: 'opacity, transform'
                                 }}></div>
                                 {overlays.map(item => (
                                     <OverlayItem 
