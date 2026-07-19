@@ -530,7 +530,7 @@ export default function App() {
                     });
                 }} />
             ) : (
-                <div id="editor-screen">
+                <div id="editor-screen" className={activeTool === 'text' ? 'text-tool-active' : ''}>
                     <input 
                         type="file" 
                         accept="image/*" 
@@ -865,7 +865,7 @@ export default function App() {
                     )}
 
                     {/* Stacked Bars */}
-                    <div className={`stacked-bars-container ${activeTool === 'text' ? 'text-tool-active' : ''}`}>
+                    <div className="stacked-bars-container">
                         {activeTool === 'text' && (
                             <StackedTextBar 
                                 textStyle={textStyle}
