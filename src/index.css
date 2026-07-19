@@ -1158,6 +1158,10 @@ div#editor-image { width: 100vh; pointer-events: auto; /* Will be constrained by
         pointer-events: none;
         z-index: 20;
     }
+    .text-tool-active .stacked-bars-container {
+        bottom: 0 !important;
+        padding: 0 !important;
+    }
 
     .bottom-bar-wrapper {
         display: flex !important;

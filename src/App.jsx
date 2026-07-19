@@ -259,6 +259,7 @@ export default function App() {
 
     const handleCanvasClick = useCallback((e) => {
         if (e.target.id === 'editor-screen' || e.target.classList.contains('canvas-area') || e.target.classList.contains('image-wrapper')) {
+            document.activeElement?.blur();
             if (editingTextId) {
                 const overlay = overlays.find(o => o.id === editingTextId);
                 if (overlay && overlay.content.trim() === '') {
@@ -289,6 +290,7 @@ export default function App() {
     }, [overlays]);
 
     const handleTextDone = useCallback(() => {
+        document.activeElement?.blur();
         if (editingTextId) {
             const overlay = overlays.find(o => o.id === editingTextId);
             if (overlay && overlay.content.trim() === '') {
@@ -473,8 +475,41 @@ export default function App() {
             }
         };
         window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
     }, [undo, redo]);
+
+    // Disable right click menu
+    useEffect(() => {
+        const handleContextMenu = (e) => e.preventDefault();
+        document.addEventListener('contextmenu', handleContextMenu);
+        return () => document.removeEventListener('contextmenu', handleContextMenu);
+    }, []);
+
+    // Handle mobile keyboard viewport sizing
+    useEffect(() => {
+        const handleViewportResize = () => {
+            if (window.visualViewport) {
+                document.documentElement.style.setProperty('--vv-height', `${window.visualViewport.height}px`);
+                document.documentElement.style.setProperty('--vv-offset-top', `${window.visualViewport.offsetTop}px`);
+            }
+        };
+
+        if (window.visualViewport) {
+            handleViewportResize();
+            window.visualViewport.addEventListener('resize', handleViewportResize);
+            window.visualViewport.addEventListener('scroll', handleViewportResize);
+        }
+
+        return () => {
+            if (window.visualViewport) {
+                window.visualViewport.removeEventListener('resize', handleViewportResize);
+                window.visualViewport.removeEventListener('scroll', handleViewportResize);
+            }
+        };
+    }, []);
 
     const computedFilterCSS = useMemo(() => {
         const a = adjustments;
@@ -548,7 +583,7 @@ export default function App() {
                     });
                 }} />
             ) : (
-                <div id="editor-screen" className={activeTool === 'text' ? 'text-tool-active' : ''}>
+                <div id="editor-screen" className={activeTool === 'text' ? 'text-tool-active' : ''} style={{ height: 'var(--vv-height, 100vh)', marginTop: 'var(--vv-offset-top, 0px)' }}>
                     <input 
                         type="file" 
                         accept="image/*" 
@@ -602,8 +637,8 @@ export default function App() {
                         />
                     )}
 
-                    <div className="canvas-area" onClick={handleCanvasClick}>
-                        <div className={`image-wrapper`} style={{ backgroundColor: adjustments.canvasBg, '--polaroid-padding': `${adjustments.polaroidPadding}px ${adjustments.polaroidPadding}px ${adjustments.polaroidPadding * 3.5}px ${adjustments.polaroidPadding}px` }} onClick={handleCanvasClick}>
+                    <div className="canvas-area" onPointerDown={handleCanvasClick}>
+                        <div className={`image-wrapper`} style={{ backgroundColor: adjustments.canvasBg, '--polaroid-padding': `${adjustments.polaroidPadding}px ${adjustments.polaroidPadding}px ${adjustments.polaroidPadding * 3.5}px ${adjustments.polaroidPadding}px` }} onPointerDown={handleCanvasClick}>
                             <div ref={imageContentRef} className={`image-content-layer`} style={{ position: 'relative', display: 'flex', width: '100%', height: '100%' }}>
                                 <img 
                                     ref={imgRef}

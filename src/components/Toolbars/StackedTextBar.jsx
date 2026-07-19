@@ -29,14 +29,14 @@ export function StackedTextBar({ textStyle, onStyleChange, onDone, onDelete, onI
     return (
         <>
             {/* TOP RIGHT DONE BUTTON */}
-            <button className="top-right-done-btn" onClick={onDone}>
+            <button className="top-right-done-btn" onPointerDown={(e) => { e.preventDefault(); onDone(); }}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path d="M5 12l5 5 10-10" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
             </button>
 
             {/* LEVEL 3 */}
-            <div className={`floating-bar floating-bar--l3 ${activeL2 !== 'l3-fonts' ? 'glass-surface' : 'font-mode-container'}`}>
+            <div className={`floating-bar floating-bar--l3 ${activeL2 !== 'l3-fonts' ? 'glass-surface' : 'font-mode-container'}`} onPointerDown={(e) => e.preventDefault()}>
                 {activeL2 === 'l3-fonts' && (
                     <div className="l3-panel">
                         <div className="font-boxes">
@@ -139,7 +139,7 @@ export function StackedTextBar({ textStyle, onStyleChange, onDone, onDelete, onI
             </div>
 
             {/* LEVEL 2 */}
-            <div className="floating-bar floating-bar--l2 glass-surface">
+            <div className="floating-bar floating-bar--l2 glass-surface" onPointerDown={(e) => e.preventDefault()}>
                 <div className="l2-group">
                     <div className="l2-scroller">
                         <button className={`seg-btn ${activeL2 === 'l3-presets' ? 'active' : ''}`} onClick={() => setActiveL2('l3-presets')}>Looks</button>
